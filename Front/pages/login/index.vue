@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="body">
     <v-app style="background-color: white; color: white">
       <v-layout justify-center>
         <v-flex xs12 sm8 md4>
@@ -75,7 +75,8 @@
                     >
                   </div>
                 </div>
-                <div class="text-right">
+
+                <div class="text-center justify-center" style="margin-top: 10px">
                   <router-link to="login/forgot-password" align-center color="white"
                     >Esqueceu a Senha?</router-link
                   >
@@ -108,5 +109,8 @@ export default {
 </script>
 
 <style scoped>
+.body{
+  padding: 80px;
+}
 
 </style>
