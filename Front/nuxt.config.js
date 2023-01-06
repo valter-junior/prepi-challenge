@@ -36,11 +36,21 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
-    '@nuxtjs/vuetify',
+    ['@nuxtjs/vuetify']
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    ['v-currency-field/nuxt', {
+      locale: 'pt-BR',
+      decimalLength: 2,
+      autoDecimalMode: true,
+      min: null,
+      max: null,
+      defaultValue: 0,
+      valueAsInteger: false,
+      allowNegative: true
+    }]
   ],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify

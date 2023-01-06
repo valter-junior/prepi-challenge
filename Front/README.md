@@ -3,8 +3,21 @@
 ## Build Setup
 
 ```bash
+#It's essential to use the following versions for correct running:
+
+# Node Version 16.13.2
+
+# Vue Version 2.7.10
+
+# Nuxt Version 2.15.8
+
+# Vuetify Version 2.6.10
+
 # install dependencies
 $ yarn install
+
+# generate static project
+$ yarn generate
 
 # serve with hot reload at localhost:3000
 $ yarn dev
@@ -13,8 +26,6 @@ $ yarn dev
 $ yarn build
 $ yarn start
 
-# generate static project
-$ yarn generate
 ```
 
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
