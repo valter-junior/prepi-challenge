@@ -67,6 +67,7 @@
                     class="mt-4"
                     color="grey darken-1"
                     value="log in"
+                    to="/dashboard"
                     >Acessar</v-btn
                   >
                   <div class="text-center justify-center">
