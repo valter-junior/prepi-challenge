@@ -1,5 +1,8 @@
 <template>
   <v-app class="body" :dark="$vuetify.theme.dark" style="background: var(--v-primary-base)">
+    <div class="img">
+      <img src="~/assets/images/prepi.png" />
+    </div>
     <v-main>
       <Nuxt />
     </v-main>
@@ -11,5 +14,9 @@
 .body {
   overflow: hidden;
   height: 100vh;
+}
+.img {
+  padding: 24px;
+  height: 12%;
 }
 </style>
