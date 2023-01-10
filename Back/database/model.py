@@ -8,7 +8,7 @@ class Account(Base):
     __tablename__ = "accounts"
 
     id = Column(UUID, primary_key=True, index=True)
-    frist_name = Column(String, unique=False, index=False)
+    first_name = Column(String, unique=False, index=False)
     last_name = Column(String, unique=False, index=False)
     email = Column(String, unique=True, index=True)
     hashed_password = Column(String)
@@ -26,24 +26,24 @@ class Account(Base):
 class Product(Base):
     __tablename__ = "products"
 
-    id = Column(UUID, unique=True, index=True)
+    id = Column(UUID, primary_key=True, index=True)
     amount = Column(Integer)
     value = Column(Integer)
     register_date = Column(DateTime)
     account_id = Column(UUID, ForeignKey("accounts.id"))
 
-    account = relationship("Account", back_populate="products")
+    account = relationship("Account", back_populates="products")
     order = relationship("Order", back_populates="products")
 
 class Order(Base):
     __tablename__ = "orders"
 
-    id = Column(UUID, unique=True, index=True)
+    id = Column(UUID, primary_key=True, index=True)
     amount = Column(Integer)
     value = Column(Integer)
     order_date = Column(DateTime)
     product_id = Column(UUID, ForeignKey("products.id"))
     account_id = Column(UUID, ForeignKey("accounts.id"))
 
-    account = relationship("Account", back_populate="orders")
+    account = relationship("Account", back_populates="orders")
     products = relationship("Product", back_populates="order")
