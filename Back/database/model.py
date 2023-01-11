@@ -2,7 +2,7 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, DateTime
 from sqlalchemy.orm import relationship
 
-from .database import Base
+from database.database import Base
 
 class Account(Base):
     __tablename__ = "accounts"
@@ -27,6 +27,7 @@ class Product(Base):
     __tablename__ = "products"
 
     id = Column(UUID, primary_key=True, index=True)
+    name = Column(String, unique=True, index=False)
     amount = Column(Integer)
     value = Column(Integer)
     register_date = Column(DateTime)

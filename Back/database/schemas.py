@@ -4,15 +4,16 @@ import datetime
 
 
 class ProductBase(BaseModel):
-    amount: int
-    value: int
-    register_date : datetime.datetime
+    name: str
 
 class ProductCreate(ProductBase):
     pass
 
 class Product(ProductBase):
-    id: str
+    id : str
+    amount: int
+    value: int
+    register_date : datetime.datetime
     account_id: str
 
     class Config:
