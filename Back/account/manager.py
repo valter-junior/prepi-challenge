@@ -1,17 +1,19 @@
 from sqlalchemy.orm import Session
 import uuid
 from database import model, schemas
+from auth import manager as get
 
 def get_account_by_email(db: Session, email: str):
     return db.query(model.Account).filter(model.Account.email == email).first()
 
+def get_all (db: Session):
+    return db.query(model.Account).all()
 
 def create_account(db: Session, account: schemas.Account):
-    hash_pass = account.hashed_password + "notreallyhashed"
     db_account = model.Account(
         id = uuid.uuid4().hex,
         email=account.email, 
-        hashed_password=hash_pass,
+        hashed_password=get.get_password_hash(account.hashed_password),
         first_name= account.first_name,
         last_name = account.last_name,
         first_date_product_register = account.first_date_product_register,
