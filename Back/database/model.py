@@ -18,6 +18,8 @@ class Account(Base):
     first_date_order = Column(DateTime)
     last_date_order = Column(DateTime)
     amount_order = Column(Integer)
+    amount_register_product = Column(Integer)
+    amount_register_order = Column(Integer)
 
     products = relationship("Product", back_populates="account")
     orders = relationship("Order", back_populates="account")

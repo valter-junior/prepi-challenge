@@ -28,4 +28,13 @@ async def login_for_access_token(db: Session = Depends(get_db), form_data: OAuth
     access_token = manager.create_access_token(
         data={"sub": user.email}, expires_delta=access_token_expires
     )
+
     return {"access_token": access_token, "token_type": "bearer"}
+
+
+@router.post("/create", response_model=schemas.Account)
+def create_account(account: schemas.Account, db: Session = Depends(get_db)):
+    db_account = manager.get_account_by_email(db, email=account.email)
+    if db_account:
+        raise HTTPException(status_code=400, detail="Email already registered")
+    return manager.create_account(db=db, account=account)

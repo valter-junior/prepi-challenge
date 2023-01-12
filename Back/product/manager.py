@@ -10,17 +10,19 @@ def get_all (db: Session):
 
 def create_product(db: Session, product: schemas.Product):
 
-    list_product = db.query(model.Product).filter(model.Product.account_id == product.account_id).first()    
+    find_product = db.query(model.Product).filter(model.Product.account_id == product.account_id).first()    
     user = db.query(model.Account).filter(model.Account.id == product.account_id).first()
     
-    if not list_product:
+    if not find_product:
         user.first_date_product_register = product.register_date
         user.last_date_product_register = product.register_date
         user.amount_product += product.amount
+        user.amount_register_product += 1
 
-    if user and list_product:
+    if user and find_product:
         user.last_date_product_register = product.register_date
         user.amount_product += product.amount
+        user.amount_register_product += 1
     
     db_product = model.Product(
         id = uuid.uuid4().hex,
