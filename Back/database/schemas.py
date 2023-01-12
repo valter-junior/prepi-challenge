@@ -48,12 +48,14 @@ class Account(AccountBase):
     last_name: str
     email : str
     hashed_password : str
-    first_date_product_register : datetime.datetime 
-    last_date_product_register : datetime.datetime
-    amount_product : int
-    first_date_order : datetime.datetime
-    last_date_order : datetime.datetime
-    amount_order : int
+    first_date_product_register : datetime.datetime | None = None
+    last_date_product_register : datetime.datetime | None = None
+    amount_product : int | None = None
+    first_date_order : datetime.datetime | None = None
+    last_date_order : datetime.datetime | None = None
+    amount_order : int | None = None
+    amount_register_product : int | None = None
+    amount_register_order : int | None = None
 
     products = list[Product]
     orders = list[Order]
