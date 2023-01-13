@@ -19,7 +19,7 @@ $ yarn install
 # generate static project
 $ yarn generate
 
-# serve with hot reload at localhost:3000
+# serve with hot reload at localhost:3000/login
 $ yarn dev
 
 
