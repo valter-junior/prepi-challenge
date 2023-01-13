@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 import uuid
 from database import model, schemas
+from sheets.manager import execute
 
 def get_orders_by_product(db: Session, product_id: str):
     return db.query(model.Order).filter(model.Order.product_id == product_id).all()
@@ -52,5 +53,7 @@ def create_order(db: Session, order: schemas.Order):
     db.add(db_order)
     db.commit()
     db.refresh(db_order)
+
+    execute()
 
     return db_order

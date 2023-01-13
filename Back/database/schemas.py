@@ -10,7 +10,7 @@ class ProductCreate(ProductBase):
     pass
 
 class Product(ProductBase):
-    id : str
+    id : str 
     amount: int
     value: int
     register_date : datetime.datetime
@@ -37,17 +37,17 @@ class Order(OrderBase):
 
 
 class AccountBase(BaseModel):
+    id: str
     email: str
 
 class AccountCreate(AccountBase):
     password: str
 
 class Account(AccountBase):
-    id = str
     first_name: str
     last_name: str
-    email : str
-    hashed_password : str
+    email: str
+    hashed_password: str
     first_date_product_register : datetime.datetime | None = None
     last_date_product_register : datetime.datetime | None = None
     amount_product : int | None = None
@@ -66,6 +66,7 @@ class Account(AccountBase):
 class Token(BaseModel):
     access_token: str
     token_type: str
+    user: object
 
 
 class TokenData(BaseModel):
