@@ -1,6 +1,8 @@
 from sqlalchemy.orm import Session
 import uuid
 from database import model, schemas
+from sheets.manager import execute
+
 
 def get_product_by_name(db: Session, name: str):
     return db.query(model.Product).filter(model.Product.name == name).first()
@@ -33,8 +35,12 @@ def create_product(db: Session, product: schemas.Product):
         account_id = product.account_id
         )
 
+    
+
     db.add(db_product)
     db.commit()
     db.refresh(db_product)
+
+    execute()
 
     return db_product
