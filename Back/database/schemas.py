@@ -10,7 +10,6 @@ class ProductCreate(ProductBase):
     pass
 
 class Product(ProductBase):
-    id : str 
     amount: int
     value: int
     register_date : datetime.datetime
@@ -28,7 +27,6 @@ class OrderCreate(OrderBase):
     pass
 
 class Order(OrderBase):
-    id: str
     product_id: str
     account_id: str
 

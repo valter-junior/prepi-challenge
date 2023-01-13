@@ -29,7 +29,7 @@
               ></v-text-field>
 
               <v-text-field
-                v-model="register.quantity"
+                v-model="register.amount"
                 color="black"
                 light
                 label="Quantidade"
@@ -51,7 +51,7 @@
             </v-col>
           </v-container>
           <v-card-actions class="text-center justify-center">
-            <v-btn to="/dashboard" color="grey darken-1">
+            <v-btn @click="create()" color="grey darken-1">
               Registrar
               <v-icon icon="mdi-chevron-right" end></v-icon>
             </v-btn>
@@ -64,15 +64,43 @@
 
 <script>
 export default {
+
   data() {
     return {
       register: {
         name: "",
-        quantity: 0,
+        amount: 0,
         value: 0,
       },
       erros: {},
     };
+  },
+   methods: {
+
+    create() {
+
+      const data = {
+         name: this.register.name,
+         amount: this.register.amount,
+         value: this.register.value,
+         register_date: Date.now(),
+         account_id: this.$store.state.auth.user.id
+        }
+      this.$axios
+        .$post("/products/create", {
+              name: this.register.name, 
+              amount: this.register.amount,
+              value: this.register.value,
+              register_date: Date.now(),
+              account_id: this.$store.state.auth.user.id
+               })
+        .then((response) => {
+            console.table(response),
+            this.$toast.success("Produto cadastrada com sucesso!"),
+            this.$router.push("/dashboard");
+        })
+        .catch(() => {});
+    },
   },
 };
 </script>
