@@ -28,6 +28,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -41,6 +42,9 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/toast',
+    '@nuxtjs/auth',
     ['v-currency-field/nuxt', {
       locale: 'pt-BR',
       decimalLength: 2,
@@ -50,8 +54,45 @@ export default {
       defaultValue: 0,
       valueAsInteger: false,
       allowNegative: true
-    }]
+    }],
   ],
+
+  axios: {
+    baseURL: process.env.API_KEY, //Cant be used with proxy
+    browserBaseURL: process.env.API_KEY, // client url
+    common: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Accept': 'application/json, text/plain, */*',
+    },
+  },
+
+  auth: {
+    redirect: {
+      login: '/login',
+      logout: '/login',  
+    },
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: process.env.API_KEY+"/account/sign-in",
+            method: "post",
+            propertyName: "data.access_token",
+          },
+          logout: false,
+          user: false,
+        },
+        tokenType: '',
+        tokenName: 'x-auth',
+        autoFetchUser: false
+      },
+    },
+  },
+
+//  router: {
+    //middleware: ['auth']
+  //},
+
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {

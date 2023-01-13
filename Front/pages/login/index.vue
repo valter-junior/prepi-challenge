@@ -63,22 +63,25 @@
                 </v-text-field>
                 <div class="text-center justify-center">
                   <v-btn
-                    type="submit"
-                    class="mt-4"
                     color="grey darken-1"
-                    value="log in"
-                    to="/dashboard"
+                    @click="signIn()"
                     >Acessar</v-btn
                   >
                   <div class="text-center justify-center">
-                    <v-btn to="register" class="mt-4" color="grey darken-1"
+                    <v-btn to="/register" class="mt-4" color="grey darken-1"
                       >Registrar</v-btn
                     >
                   </div>
                 </div>
 
-                <div class="text-center justify-center" style="margin-top: 10px">
-                  <router-link to="login/forgot-password" align-center color="white"
+                <div
+                  class="text-center justify-center"
+                  style="margin-top: 10px"
+                >
+                  <router-link
+                    to="login/forgot-password"
+                    align-center
+                    color="white"
                     >Esqueceu a Senha?</router-link
                   >
                 </div>
@@ -106,12 +109,31 @@ export default {
       show: false,
     };
   },
+  methods: {
+    async signIn() {
+
+      const User = new FormData();
+
+      User.append('username', this.user.email)
+      User.append('password', this.user.password)
+        
+      await this.$auth
+        .loginWith("local", {data: User})
+        .then((response) => {
+            
+            this.$auth.setUser(response.data.user);
+            this.$toast.success("Acesso permitido!"),
+            this.$router.push("/dashboard");
+    
+        })
+        .catch(() => {});
+    },
+  },
 };
 </script>
 
 <style scoped>
-.body{
+.body {
   padding: 80px;
 }
-
 </style>
