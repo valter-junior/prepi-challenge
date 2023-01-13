@@ -18,7 +18,7 @@ router = APIRouter(
 def create_product(product: schemas.Product, db: Session = Depends(get_db)):
     db_product = manager.get_product_by_name(db, name=product.name)
     if db_product:
-        raise HTTPException(status_code=400, detail="Email already registered")
+        raise HTTPException(status_code=400, detail="Product already registered")
     return manager.create_product(db=db, product=product)
 
 @router.get("/list", response_model=List[schemas.Product])
