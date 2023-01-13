@@ -1,16 +1,15 @@
 from typing import List
-from fastapi import Depends
+from fastapi import Depends, Query
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, HTTPException
 from database import  schemas
 from product import manager
 from database.database import get_db
-from auth.manager import get_current_user
+
 
 router = APIRouter(
     prefix="/products",
     tags=["product"],
-    dependencies=[Depends(get_current_user)],
     responses={404: {"description": "Not found"}},
 )
 
